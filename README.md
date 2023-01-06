@@ -1,2 +1,2 @@
-# sicp_js
-Structure and Interpretation of Computer Programs - JS Edition - Notes
+# Structure and Interpretation of Computer Programs - JS Edition
+Exercises, notes and scratch pad for the book
