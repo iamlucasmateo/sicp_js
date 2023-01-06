@@ -1,2 +1,5 @@
 # Notes
-Exercises, notes and scratch pad for the book
+**operator combinations**
+**substitution model** for function application
+**normal-order evaluation**
+**applicative-order evaluation**
