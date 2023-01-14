@@ -1,3 +1,5 @@
+import { square_root_iter } from "./note_square_root";
+
 // Ex 1.2
 const expression = (5 + 4 + (2 - (3 - (6 + 4/5)))) / (3 * (6 - 2) * (2 - 7))
 
