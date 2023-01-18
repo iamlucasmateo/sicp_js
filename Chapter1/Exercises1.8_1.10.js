@@ -77,6 +77,6 @@ function h(n) {
     return ackermann(2, n);
 }
 
-function raise(n) {
-    return n === 1 ? 2 : 2**raise(n-1);
+function raise_iter(n) {
+    return n === 1 ? 2 : 2**raise_iter(n-1);
 }
