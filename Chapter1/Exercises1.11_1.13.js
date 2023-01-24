@@ -1,9 +1,11 @@
 // Exercise 1.11
+// f(n) = f(n-1) + 2*f(n-2) + 3*f(n-3)
+
 function exercise_11_recursive(n) {
     return (
         n < 3
         ? n
-        : exercise_11(n-1) + 2 * exercise_11(n-2) + 3 * exercise_11(n-3)
+        : exercise_11_recursive(n-1) + 2 * exercise_11_recursive(n-2) + 3 * exercise_11_recursive(n-3)
     )
 }
 
@@ -25,6 +27,11 @@ function exercise_11_iterative(n) {
         return _excercise_1_state(newSteps, newCumulative, newValue_n_2, newValue_n_3)
     }
 
-    return _excercise_1_state(0)
+    const valueFor0 = 0
+    const valueFor1 = 1
+    const valueFor2 = 2
+    const valueFor3 = valueFor2 + 2 * valueFor1 + 3 * valueFor0
+
+    return _excercise_1_state(3, valueFor3, valueFor2, valueFor1)
 
 }

@@ -1,5 +1,8 @@
 function _statement(value, func1, func2) {
-    const statement = `func1:  ${func1(value)}. func2:  ${func2(value)}. `
+    const value1 = func1(value);
+    const value2 = func2(value);
+    const assesment = value1 === value2 ? "They are equal." : "They are not equal."
+    const statement = `func1:  ${value1}. func2:  ${value2}. ${assesment}`
     console.log(statement)
 }
 
