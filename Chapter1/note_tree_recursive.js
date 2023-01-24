@@ -44,10 +44,61 @@ function check_print() {
 
 
 // Counting change
-function change() {
-    function _change()
+function change(amount) {
+    function _change(amount, coinType) {
+        return (
+            _closeEnough(amount, 0)
+            ? 1
+            : _closeEnough(coinType, 0)
+            ? 0
+            : amount < 0
+            ? 0
+            : _change(amount, coinType - 1) 
+            + _change(amount - coinMap[coinType], coinType)
+        )
+    }
+
+    function _closeEnough(value1, value2) {
+        return Math.abs(value1, value2) < 0.0001
+    }
+
+    coinMap = {
+        5: 0.5,
+        4: 0.25,
+        3: 0.1,
+        2: 0.05,
+        1: 0.01,
+        0: 0
+    }
+
+    let startCoin = 5;
+    
+    for (let i = 0; i < 6; i++) {
+        if (coinMap[i] > amount) {
+            startCoin = i - 1;
+            break
+        }
+    }
+
+    return _change(amount, startCoin)
 }
 
 
 // Tabulation/memoization
 // For Fibonacci tree-recursive
+const remember = {};
+function fib_rec_tabulated(n) {
+    if (Object.keys(remember).includes(n)) {
+        return remember[n]
+    }
+    let value = (
+        n === 0
+        ? 0
+        : n === 1
+        ? 1
+        : fib_rec_tabulated(n-1) + fib_rec_tabulated(n-2)
+    )
+    remember[n] = value;
+    
+    return value;
+}
