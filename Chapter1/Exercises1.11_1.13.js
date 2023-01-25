@@ -35,3 +35,50 @@ function exercise_11_iterative(n) {
     return _excercise_1_state(3, valueFor3, valueFor2, valueFor1)
 
 }
+
+
+
+// Exercise 11.12
+// Pascal's triangle
+
+function getPascalValueFromPrevious(previous) {
+    const size = previous.length + 1;
+    const getValue = (_, index) => {
+        return (
+            index === 0 || index === (size - 1)
+            ? 1
+            : previous[index-1] + previous[index]
+        )
+    }
+    
+    return Array.from(Array(size)).map(getValue)
+
+}
+
+
+function pascal_recursive(row) {
+    if (row < 1) throw new Error("Should be >= 1")
+    if (row === 1) return [1]
+    const previous = pascal_recursive(row - 1);
+
+    return getPascalValueFromPrevious(previous);
+}
+
+
+
+function pascal_iterative(row) {
+    if (row < 1) throw new Error("Should be >= 1")
+    if (row === 1) return [1]
+    function _pascal_iterative(steps, previousRow) {
+        let returnValue = previousRow;
+        if (steps <= row) {
+            const updatedRow = getPascalValueFromPrevious(previousRow);
+            returnValue = _pascal_iterative(steps+1, updatedRow);
+        }
+
+        return returnValue;
+
+    }
+
+    return _pascal_iterative(1, [1])
+}

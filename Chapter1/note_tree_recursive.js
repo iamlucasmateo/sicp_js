@@ -49,9 +49,7 @@ function change(amount) {
         return (
             _closeEnough(amount, 0)
             ? 1
-            : _closeEnough(coinType, 0)
-            ? 0
-            : amount < 0
+            : _closeEnough(coinType, 0) || amount < 0
             ? 0
             : _change(amount, coinType - 1) 
             + _change(amount - coinMap[coinType], coinType)
