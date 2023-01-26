@@ -27,44 +27,57 @@ function fast_exp(b, n) {
 }
 
 // Fast exponential iterative
+// Using an invariant quantity
 function fast_exp_iter(b, n) {
     if (n === 0) {
         return 1;
     }
-    function _fast_exp_iter(b, n, steps, cumulative) {
-        if (!_is_even(n)) {
-            return fast_exp_iter(b, n-1) * b;
+    function _fast_exp_iter(b, n, stateA, stateB) {
+        // stateA * stateB**n is the invariant
+        if (n === 0) {
+            return stateA;
         }
-        const updatedSteps = steps * 2;
-        const updatedCumulative = cumulative * cumulative;
-        if (updatedSteps == n) {
-            return cumulative;
-        }
-        if (updatedSteps * 2 > n) {
-            const remaining = n - updatedSteps;
-            return cumulative * _fast_exp_iter(b, remaining, 1, b*b);
+        if (_is_even(n)) {
+            const updatedStateA = stateA;
+            const updatedStateB = stateB * stateB;
+            const newN = n/2;
+            
+            return _fast_exp_iter(b, newN, updatedStateA, updatedStateB);
         }
         
-        return _fast_exp_iter(b, n, updatedSteps, updatedCumulative);
+        const updatedStateA = stateA * stateB;
+        const updatedStateB = stateB;
+        const newN = n-1;
+
+        return _fast_exp_iter(b, newN, updatedStateA, updatedStateB)
     }
     
-    return _fast_exp_iter(b, n, 1, b*b);
+    return _fast_exp_iter(b, n, 1, b);
 }
 
 
 // Exercise 1.17
 function times_rec(a, b) {
     return (
-        b === 1
-        ? a
+        b === 0
+        ? 0
         : a + times_rec(a, b-1)
     )
 
 }
 
 function times_fast_rec(a, b) {
-
+    return (
+        b === 0
+        ? 0
+        : _is_even(b)
+        ? times_fast_rec(a, b/2) + times_fast_rec(a, b/2) 
+        : a + times_fast_rec(a, b-1)
+    ) 
 }
+
+
+// Exercise 1.18
 
 
 function times_iter(a, b) {
@@ -77,3 +90,15 @@ function times_iter(a, b) {
 
     return _times_iter(0, 0)
 }
+
+
+// Correct this
+function times_iter_fast(a, b) {
+    function _times_iter_fast(a, b, steps, cumulative) {
+        
+    }
+
+    return _times_iter_fast(a, b, 1, a);
+}
+
+// Exercise 1.18
