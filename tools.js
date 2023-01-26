@@ -1,20 +1,39 @@
-function _compare_statement(value, func1, func2) {
-    const value1 = func1(value);
-    const value2 = func2(value);
-    const assesment = value1 === value2 ? "They are equal." : "They are not equal."
-    const statement = `func1:  ${value1}. func2:  ${value2}. ${assesment}`
-    console.log(statement)
+class FunctionChecker {
+    constructor(func) {
+        this.func = func;
+    }
+    
+    #statement = (parameters) => {
+        console.log(this.func(...parameters))
+    }
+    
+    print(size, func_args) {
+        const emptyArray =  Array.from(Array(size));
+        emptyArray.forEach((_, index) => this.#statement([...func_args, index]));
+    }
 }
 
-function compare_funcs(value, func1, func2) {
-    Array.from(Array(value)).forEach((_, index) => console.log(_compare_statement(index, func1, func2)))
-}
 
-function _statement(value, func) {
-    console.log(func(value))
-}
+class Comparator {
+    constructor(func1, func2) {
+        this.func1 = func1;
+        this.func2 = func2;
+    }
 
-function print_func(value, func, init_value) {
-    const init = init_value ? init_value : 0;
-    Array.from(Array(value)).forEach((_, index) => console.log(_statement(index+init, func)))
+    #compare_statement = (parameters) => {
+        const value1 = this.func1(...parameters);
+        const value2 = this.func2(...parameters);
+        const assesment = value1 === value2 ? "They are equal." : "They are not equal."
+        const statement = `func1:  ${value1}. func2:  ${value2}. ${assesment}`
+        console.log(statement)
+    }
+    
+    
+    compare(size, func_args) {
+        if (!func_args) {
+            func_args = [];
+        }
+        const emptyArray = Array.from(Array(size));
+        emptyArray.forEach((_, index) => this.#compare_statement([...func_args, index]));
+    }
 }

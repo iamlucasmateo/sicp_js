@@ -57,6 +57,7 @@ function fast_exp_iter(b, n) {
 
 
 // Exercise 1.17
+// Multiplying recursively
 function times_rec(a, b) {
     return (
         b === 0
@@ -93,12 +94,20 @@ function times_iter(a, b) {
 
 
 // Correct this
-function times_iter_fast(a, b) {
-    function _times_iter_fast(a, b, steps, cumulative) {
-        
+function times_iter_fast(x, y) {
+    function _times_iter_fast(x, y, stateA, stateB) {
+        if (y === 0) {
+            return stateA;
+        } 
+        if (_is_even(y)) {
+            return _times_iter_fast(x, y/2, stateA, stateB + stateB)
+        } else {
+            return _times_iter_fast(x, y-1, stateA + stateB, stateB)
+        }
     }
 
-    return _times_iter_fast(a, b, 1, a);
+    return _times_iter_fast(x, y, 0, x);
 }
 
-// Exercise 1.18
+// Exercise 1.19
+// Logarithmic Fibonacci
