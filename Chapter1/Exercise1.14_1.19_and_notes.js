@@ -111,3 +111,21 @@ function times_iter_fast(x, y) {
 
 // Exercise 1.19
 // Logarithmic Fibonacci
+function fib_log(n) {
+    function _fib_log (a, b, p, q, count) {
+        if (count === 0) {
+            return b
+        }
+        if (_is_even(count)) {
+            const newP = q*q + p*p;
+            const newQ = 2*p*q + q*q;
+            return _fib_log(a, b, newP, newQ, count / 2)
+        }
+        const newA = b*q + a*q + a*p;
+        const newB = b*p + a*q;
+
+        return _fib_log(newA, newB, p, q, count-1);
+    }
+
+    return _fib_log(1, 0, 0, 1, n) 
+}
