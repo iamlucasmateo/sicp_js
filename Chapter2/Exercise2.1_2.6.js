@@ -8,6 +8,8 @@ function gcd(x, y) {
 
 
 // Exercise 2.1
+// The book plays with different interfaces for rational numbers and pairs, 
+// here is one OOP implementation
 class Rational {
     constructor(n, d) {
         if (d === 0) {
@@ -83,6 +85,7 @@ class Rectangle {
 }
 
 // Exercise 2.4
+// An implementation of pairs using functions
 function pair_rep1(x, y) {
     return m => m(x, y)
 }
@@ -97,7 +100,7 @@ function tail_rep1(my_pair) {
 }
 
 
-// Exercise 1.25
+// Exercise 2.5
 function pair_rep2(x, y) {
     return (2**x)*(3**y);
 }
@@ -106,7 +109,7 @@ function _deduce_exponent(reduced, root, steps=0) {
     return (
         reduced % root !== 0
         ? steps
-        : _deduced_exponent(reduced / root, root, steps + 1)
+        : _deduce_exponent(reduced / root, root, steps + 1)
     )
 }
 
@@ -116,4 +119,18 @@ function head_rep2(my_pair) {
 
 function tail_rep2(my_pair) {
     return _deduce_exponent(my_pair, 3);
+}
+
+
+// Excercise 2.6
+// Church numerals
+const zero = f => x => x;
+function add_1(n) {
+    return f => x => f(n(f)(x));
+}
+
+const one = f => x => f(x)
+const two = f => x => f(f(x))
+function plus(n, m) {
+    return f => x => n(f)(m(f)(x));
 }
