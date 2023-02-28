@@ -84,6 +84,28 @@ class Rectangle {
     }
 }
 
+// An implementation of pairs with functions
+function pair_rep0(x, y) {
+    function _dispatch(m) {
+        return (
+            m === 0
+            ? x
+            : m === 1
+            ? y
+            : throw_error("argument must be 0 or 1")
+        )
+    }
+}
+
+function head_rep0(my_pair) {
+    return my_pair(0);
+}
+
+function tail_rep0(my_pair) {
+    return my_pair(1);
+}
+
+
 // Exercise 2.4
 // An implementation of pairs using functions
 function pair_rep1(x, y) {
@@ -101,6 +123,7 @@ function tail_rep1(my_pair) {
 
 
 // Exercise 2.5
+// An implementation of pairs with integers
 function pair_rep2(x, y) {
     return (2**x)*(3**y);
 }
