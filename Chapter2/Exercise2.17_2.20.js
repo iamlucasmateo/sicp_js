@@ -26,7 +26,7 @@ function make_list(...args) {
     return (
         args.length === 1
         ? pair(args[0], null)
-        : extend(pair(args[0], null), make_list(...args.slice(1)))
+        : pair(args[0], make_list(...args.slice(1)))
     )
 
 }
@@ -209,3 +209,15 @@ const list_2_25_2 = make_list(make_list(7))
 const result_2_25_2 = head(head(list_2_25_2))
 const list_2_25_3 = make_list(1, make_list(2, make_list(3, make_list(4, make_list(5, make_list(6, 7))))))
 const result_2_25_3 = head(tail(head(tail(head(tail(head(tail(head(tail(head(tail(list_2_25_3))))))))))))
+
+
+// 2.27
+function deep_reverse(items) {
+    if (is_null(items)) {
+        return items;
+    }
+    if (length(items) === 2) {
+        return pair(head(tail(items)), pair(head(items), null))
+    }
+    return append(deep_reverse(tail(items)), head(items))
+}
